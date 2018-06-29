@@ -20,10 +20,10 @@ io.on('connection', function (socket)  {   //Register an event listener -- liste
 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User Joined'));
 
-    socket.on('createMessage', (newMessage) => {
+    socket.on('createMessage', (newMessage, callback) => {
         console.log('Message created', newMessage);
-
         io.emit('newMessage', generateMessage(newMessage.from, newMessage.text));  //emits an event to every single connection
+        callback('This is from the server');
 
      /*   socket.broadcast.emit('newMessage', {
             from: newMessage.from,
